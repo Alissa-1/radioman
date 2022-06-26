@@ -3,9 +3,23 @@ package ru.netology.domain;
 public class Radio {
     // Поля для задания значений объекта Радио
     private int currentRadioStationNumber;
-    private int currentVolume = 5;
+    private int currentVolume = 50;
+    private int numberOfStations = 10;
+    private int maxStation = 9;
 
-    // Метод Getter - показать заданные значения объекта Радио
+    // КОНСТРУКТОРЫ
+
+    public Radio() {
+    }
+
+    public Radio(int numberOfStations) {
+        this.numberOfStations = numberOfStations;
+        maxStation = numberOfStations - 1;
+    }
+
+    // МЕТОДЫ
+
+    // Методы Getter - показать заданные значения объекта Радио
     public int getRadioStationNumber() {
         return currentRadioStationNumber;
     }
@@ -14,44 +28,55 @@ public class Radio {
         return currentVolume;
     }
 
-    // Метод Setter  - изменить (настроить) значения объекта Радио
+    public int getNumberOfStations() {
 
-    public void setRadioStationNumber(int newRadioStationNumber) {
-        if (newRadioStationNumber < 0) {
+        return numberOfStations;
+    }
+
+    // Методы Setter  - изменить (настроить) значения объекта Радио
+
+    public void setCurrentRadioStationNumber(int newCurrentRadioStationNumber) {
+        if (newCurrentRadioStationNumber < 0) {
             return;
         }
         ;
-        if (newRadioStationNumber > 9) {
+        if (newCurrentRadioStationNumber > maxStation) {
             return;
         }
-        currentRadioStationNumber = newRadioStationNumber;
+        currentRadioStationNumber = newCurrentRadioStationNumber;
     }
 
-    public void setVolume(int newVolume) {
-        if (newVolume < 0) {
+    public void setVolume(int newCurrentVolume) {
+        if (newCurrentVolume < 0) {
             return;
         }
-        if (newVolume > 10) {
+        if (newCurrentVolume > 100) {
             return;
         }
-        currentVolume = newVolume;
+        currentVolume = newCurrentVolume;
     }
-
-    // Методы
 
     // Методы для кнопок переключения
 
+//    public void next() {
+//        if (currentRadioStationNumber == numberOfStations - 1) {
+//            currentRadioStationNumber = 0;
+//        } else {
+//            currentRadioStationNumber++;
+//        }
+//    }
+
     public void next() {
-        if (currentRadioStationNumber == 9) {
-            currentRadioStationNumber = 0;
-        } else {
+        if (currentRadioStationNumber < maxStation) {
             currentRadioStationNumber++;
+        } else {
+            currentRadioStationNumber = 0;
         }
     }
 
     public void prev() {
         if (currentRadioStationNumber == 0) {
-            currentRadioStationNumber = 9;
+            currentRadioStationNumber = maxStation;
         } else {
             currentRadioStationNumber--;
         }
@@ -59,7 +84,7 @@ public class Radio {
 
     // Методы для кнопок изменения громкости
     public void increaseVolume() {
-        if (currentVolume == 10) {
+        if (currentVolume == 100) {
             return;
         } else {
             currentVolume++;
