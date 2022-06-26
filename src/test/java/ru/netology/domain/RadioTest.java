@@ -1,11 +1,41 @@
 package ru.netology.domain;
 
 import static org.junit.jupiter.api.Assertions.*;
-
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class RadioTest {
+    // Тесты расширенных настроек
+    @Test
+    public void shouldCheckRadioStationNumberIfSetOnBound() {
+        Radio radio = new Radio(25);
+        radio.setCurrentRadioStationNumber(24);
+        assertEquals(radio.getNumberOfStations(), 25);
+        assertEquals(radio.getRadioStationNumber(), 24);
+    }
+
+    @Test
+    public void shouldCheckRadioStationNumberIfSetAsInputNumberOfStations() {
+        Radio radio = new Radio(30);
+        radio.setCurrentRadioStationNumber(30);
+        assertEquals(radio.getRadioStationNumber(), 0);
+    }
+
+    @Test
+    public void shouldCheckRadioStationNumberIfSetAboveInputNumberOfStations() {
+        Radio radio = new Radio(25);
+        radio.setCurrentRadioStationNumber(26);
+        assertEquals(radio.getRadioStationNumber(), 0);
+    }
+
+    @Test
+    public void shouldCheckRadioStationNumberIfSetCurrentStationUnderInputMax() {
+        Radio radio = new Radio(25);
+        radio.setCurrentRadioStationNumber(15);
+        assertEquals(radio.getRadioStationNumber(), 15);
+    }
+
+
+    // Предыдущее ДЗ, тесты работы настроек по умолчанию
 
     // Changing Radio Station
 
@@ -16,54 +46,54 @@ public class RadioTest {
         Radio radio = new Radio();
         int expected = 0;
         int actual = radio.getRadioStationNumber();
-        Assertions.assertEquals(expected, actual);
+        assertEquals(expected, actual);
 
     }
 
     @Test
     public void shouldSetRadioStationNumberInTheMiddle() {
         Radio radio = new Radio();
-        radio.setRadioStationNumber(5);
+        radio.setCurrentRadioStationNumber(5);
         int expected = 5;
         int actual = radio.getRadioStationNumber();
-        Assertions.assertEquals(expected, actual);
+        assertEquals(expected, actual);
 
     }
 
     @Test
     public void shouldSetRadioStationNumberInTheLowerBound() {
         Radio radio = new Radio();
-        radio.setRadioStationNumber(0);
+        radio.setCurrentRadioStationNumber(0);
         int expected = 0;
         int actual = radio.getRadioStationNumber();
-        Assertions.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
     public void shouldSetRadioStationNumberInTheUpperBound() {
         Radio radio = new Radio();
-        radio.setRadioStationNumber(9);
+        radio.setCurrentRadioStationNumber(9);
         int expected = 9;
         int actual = radio.getRadioStationNumber();
-        Assertions.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test // If there button "-" is avaliable
     public void shouldNotSetRadioStationNumberUnderTheLowerBound() {
         Radio radio = new Radio();
-        radio.setRadioStationNumber(-1);
+        radio.setCurrentRadioStationNumber(-1);
         int expected = 0;
         int actual = radio.getRadioStationNumber();
-        Assertions.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
     public void shouldNotSetRadioStationNumberAboveTheUpperBound() {
         Radio radio = new Radio();
-        radio.setRadioStationNumber(10);
+        radio.setCurrentRadioStationNumber(10);
         int expected = 0;
         int actual = radio.getRadioStationNumber();
-        Assertions.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
         // Checking Prev & Next Buttons Functions
@@ -71,41 +101,41 @@ public class RadioTest {
     @Test
     public void shouldSwitchToTheNextRadioStationIfNotLast() {
         Radio radio = new Radio();
-        radio.setRadioStationNumber(5);
+        radio.setCurrentRadioStationNumber(5);
         radio.next();
         int expected = 6;
         int actual = radio.getRadioStationNumber();
-        Assertions.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
     public void shouldSwitchToTheNextRadioStationIfLast() {
         Radio radio = new Radio();
-        radio.setRadioStationNumber(9);
+        radio.setCurrentRadioStationNumber(9);
         radio.next();
         int expected = 0;
         int actual = radio.getRadioStationNumber();
-        Assertions.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
     public void shouldSwitchToThePreviousRadioStationIfNotLast() {
         Radio radio = new Radio();
-        radio.setRadioStationNumber(5);
+        radio.setCurrentRadioStationNumber(5);
         radio.prev();
         int expected = 4;
         int actual = radio.getRadioStationNumber();
-        Assertions.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
     public void shouldSwitchToThePreviousRadioStationIfFirst() {
         Radio radio = new Radio();
-        radio.setRadioStationNumber(0);
+        radio.setCurrentRadioStationNumber(0);
         radio.prev();
         int expected = 9;
         int actual = radio.getRadioStationNumber();
-        Assertions.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
 
@@ -117,7 +147,7 @@ public class RadioTest {
         Radio radio = new Radio();
         int expected = 5;
         int actual = radio.getVolume();
-        Assertions.assertEquals(expected, actual);
+        assertEquals(expected, actual);
 
     }
 
@@ -127,7 +157,7 @@ public class RadioTest {
         radio.setVolume(6);
         int expected = 6;
         int actual = radio.getVolume();
-        Assertions.assertEquals(expected, actual);
+        assertEquals(expected, actual);
 
     }
 
@@ -137,7 +167,7 @@ public class RadioTest {
         radio.setVolume(0);
         int expected = 0;
         int actual = radio.getVolume();
-        Assertions.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -146,7 +176,7 @@ public class RadioTest {
         radio.setVolume(10);
         int expected = 10;
         int actual = radio.getVolume();
-        Assertions.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test // If there button "-" is avaliable
@@ -155,7 +185,7 @@ public class RadioTest {
         radio.setVolume(-1);
         int expected = 5;
         int actual = radio.getVolume();
-        Assertions.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -164,7 +194,7 @@ public class RadioTest {
         radio.setVolume(11);
         int expected = 5;
         int actual = radio.getVolume();
-        Assertions.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
         // Checking Increase $ Reduce Volume Buttons Functions
@@ -174,7 +204,7 @@ public class RadioTest {
         radio.increaseVolume();
         int expected = 6;
         int actual = radio.getVolume();
-        Assertions.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -184,7 +214,7 @@ public class RadioTest {
         radio.increaseVolume();
         int expected = 10;
         int actual = radio.getVolume();
-        Assertions.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -193,7 +223,7 @@ public class RadioTest {
         radio.reduceVolume();
         int expected = 4;
         int actual = radio.getVolume();
-        Assertions.assertEquals(expected, actual);
+       assertEquals(expected, actual);
     }
 
     @Test
@@ -203,6 +233,6 @@ public class RadioTest {
         radio.reduceVolume();
         int expected = 0;
         int actual = radio.getVolume();
-        Assertions.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 }
