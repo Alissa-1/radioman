@@ -145,7 +145,7 @@ public class RadioTest {
     @Test
     public void shouldCheckVolumeByDefault() {
         Radio radio = new Radio();
-        int expected = 5;
+        int expected = 50;
         int actual = radio.getVolume();
         assertEquals(expected, actual);
 
@@ -183,7 +183,7 @@ public class RadioTest {
     public void shouldNotSetVolumeUnderTheLowerBound() {
         Radio radio = new Radio();
         radio.setVolume(-1);
-        int expected = 5;
+        int expected = 50;
         int actual = radio.getVolume();
         assertEquals(expected, actual);
     }
@@ -191,8 +191,8 @@ public class RadioTest {
     @Test
     public void shouldNotSetVolumeAboveTheUpperBound() {
         Radio radio = new Radio();
-        radio.setVolume(11);
-        int expected = 5;
+        radio.setVolume(101);
+        int expected = 50;
         int actual = radio.getVolume();
         assertEquals(expected, actual);
     }
@@ -202,7 +202,7 @@ public class RadioTest {
     public void shouldIncreaseVolumeIfNotLast() {
         Radio radio = new Radio();
         radio.increaseVolume();
-        int expected = 6;
+        int expected = 51;
         int actual = radio.getVolume();
         assertEquals(expected, actual);
     }
@@ -210,9 +210,9 @@ public class RadioTest {
     @Test
     public void shouldNotIncreaseVolumeIfLast() {
         Radio radio = new Radio();
-        radio.setVolume(10);
+        radio.setVolume(100);
         radio.increaseVolume();
-        int expected = 10;
+        int expected = 100;
         int actual = radio.getVolume();
         assertEquals(expected, actual);
     }
@@ -221,7 +221,7 @@ public class RadioTest {
     public void shouldReduceVolumeIfNotFirst() {
         Radio radio = new Radio();
         radio.reduceVolume();
-        int expected = 4;
+        int expected = 49;
         int actual = radio.getVolume();
        assertEquals(expected, actual);
     }
